@@ -1,67 +1,36 @@
-# Hydrogen App
+# remix-worker-template
 
-Hydrogen is a React framework and SDK that you can use to build fast and dynamic Shopify custom storefronts.
+> The current starter template is based on Remix 0.20.1.
 
-[Check out the docs](https://shopify.dev/custom-storefronts/hydrogen)
+- [Remix Docs](https://docs.remix.run)
+- [Customer Dashboard](https://remix.run/dashboard)
 
-[Run this template on Stackblitz](https://stackblitz.com/github/Shopify/hydrogen/tree/stackblitz/templates/template-hydrogen-default)
+## Give it a try
 
-## What's in this template
+> The deploy button will guide you through the setup for CF_API_TOKEN and CF_ACCOUNT_ID on the UI. But you are still required to provide the REMIX_TOKEN as a repository secret yourself for the deploy action to work properly.
 
-- Styling with [Tailwind](https://tailwindcss.com/)
-- End-to-end testing with [Playwright](https://playwright.dev)
-- Unit testing with [Vitest](https://vitest.dev) and [Testing Library](https://testing-library.com)
-- Code formatting with [Prettier](https://prettier.io)
-- Javascript linting with [ESLint](https://eslint.org) and the Hydrogen [ESLint plugin](https://github.com/Shopify/hydrogen/tree/main/packages/eslint-plugin)
-- CSS linting with [Stylelint](https://stylelint.io)
+[![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/edmundhung/remix-worker-template)
 
-## Getting started
+## Development
 
-**Requirements:**
+To starts your app in development mode, rebuilding assets on file changes, the recommended approach is:
 
-- Node.js version 16.5.0 or higher
-- Yarn
-
-```bash
-yarn
-yarn dev
+```sh
+npm run dev
 ```
 
-Remember to update `hydrogen.config.js` with your shop's domain and Storefront API token!
+This will run your remix app in dev mode using miniflare with the Cypress test runner opened.
 
-## Previewing a production build
+## Deployment
 
-To run a local preview of your Hydrogen app in an environment similar to Oxygen, build your Hydrogen app and then run `yarn preview`:
+First, preview your app with:
 
-```bash
-yarn build
-yarn preview
+```sh
+npx wrangler preview
 ```
 
-## Building for production
+When confirmed everythings works, deploy the worker with Wrangler using:
 
-```bash
-yarn build
-```
-
-Then, you can run a local `server.js` using the production build with:
-
-```bash
-yarn serve
-```
-
-## Running tests
-
-This project contains basic end-to-end (E2E) tests in the `/tests/e2e` folder powered by [Vitest](https://vitest.dev).
-
-You can run tests in development, and they will automatically reload when you make changes to the component you provide to `hydrogen.watchForUpdates()`:
-
-```bash
-yarn test
-```
-
-To run tests in a continuous-integration (CI) environment like GitHub Actions:
-
-```bash
-yarn test:ci
+```sh
+npm run deploy
 ```

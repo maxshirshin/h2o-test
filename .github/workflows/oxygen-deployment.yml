@@ -19,20 +19,9 @@ jobs:
           node-version: '16'
           check-latest: true
 
-      - name: Get yarn cache directory
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - uses: actions/cache@v2
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
       - name: Install dependencies
         id: 'install-dependencies'
-        run: yarn
+        run: npm i --legacy-peer-deps
 
       - name: Generate deployment ID
         id: deployment-id
@@ -47,7 +36,7 @@ jobs:
 
       - name: Production build
         id: storefront-build
-        run: HYDROGEN_ASSET_BASE_URL=${{ steps.base-url.outputs.URL }} yarn build
+        run: HYDROGEN_ASSET_BASE_URL=${{ steps.base-url.outputs.URL }} npm run build
 
       - name: Publish to Oxygen
         id: deploy
@@ -55,6 +44,8 @@ jobs:
         with:
           deployment_id: ${{ steps.deployment-id.outputs.ID }}
           oxygen_deployment_token: ${{ secrets.OXYGEN_DEPLOYMENT_TOKEN }}
+          oxygen_worker_dir: ''
+          oxygen_client_dir: 'public/build'
 
       # Create GitHub Deployment
       - name: Create GitHub Deployment
