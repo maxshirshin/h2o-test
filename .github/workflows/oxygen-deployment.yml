@@ -26,7 +26,6 @@ jobs:
       - name: Generate deployment ID
         id: deployment-id
         run: |
-          yarn add ulid
           echo "::set-output name=ID::$(LC_ALL=C </dev/urandom tr -dc "0123456789abcdefghjkmnpqrstvwxyz" | head -c 9)"
 
       - name: Set asset base URL
