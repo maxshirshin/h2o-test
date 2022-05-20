@@ -5,7 +5,7 @@ account_id = "9a4b07d1292b8ac2f2b334e3ab71da57"
 zone_id = "9d4844398fba046bd2dddc2601bba634"
 
 [build]
-command = "npm run build"
+command = "echo 'noop'"
 watch_dir = "app"
 
 [build.upload]
