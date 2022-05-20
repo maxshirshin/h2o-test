@@ -3,10 +3,6 @@ import {
 } from "@remix-run/cloudflare-workers";
 import * as build from "../build/index.js";
 
-declare global {
-  const REDIRECTS: KVNamespace;
-}
-
 const handleRequest = createRequestHandler({ build });
 
 const handleEvent = async (event: FetchEvent) => {

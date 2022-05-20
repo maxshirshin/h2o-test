@@ -10,10 +10,7 @@ export let meta: MetaFunction = ({ params }) => {
 
 export let loader: LoaderFunction = async ({ request }) => {
   let start = Date.now();
-  let url = new URL(request.url);
-
-  let redirectPath = await REDIRECTS.get(url.pathname);
-  redirectPath = redirectPath || `/redirects?err=${url.pathname} not found`;
+  let redirectPath = `/redirects-stub`;
 
   return redirect(`${redirectPath}?l=${Date.now() - start}`);
 };

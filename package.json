@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "remix-worker-template",
-  "main": "./worker.js",
+  "main": "./worker/index.js",
   "description": "A demo of Remix running on Cloudflare workers.",
   "license": "MIT",
   "scripts": {
@@ -10,7 +10,7 @@
     "build:remix": "remix build",
     "build:worker": "NODE_ENV=production ts-node ./build.ts",
     "build": "npm run build:tailwind && npm run build:remix && npm run build:worker",
-    "dev:cypress": "cypress open",
+    "dev:cypress": "echo 'noop'",
     "dev:tailwind": "tailwindcss -o app/styles/tailwind.css --watch",
     "dev:miniflare": "miniflare --kv REDIRECTS --kv-persist --build-command \"npx ts-node ./build.ts\" --disable-cache --watch",
     "dev:remix": "remix watch",
