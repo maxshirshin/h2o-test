@@ -19,17 +19,6 @@ jobs:
           node-version: '16'
           check-latest: true
 
-      - name: Get yarn cache directory
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - uses: actions/cache@v2
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
       - name: Install dependencies
         id: 'install-dependencies'
         run: yarn
@@ -37,7 +26,6 @@ jobs:
       - name: Generate deployment ID
         id: deployment-id
         run: |
-          yarn add ulid
           echo "::set-output name=ID::$(LC_ALL=C </dev/urandom tr -dc "0123456789abcdefghjkmnpqrstvwxyz" | head -c 9)"
 
       - name: Set asset base URL
@@ -55,6 +43,8 @@ jobs:
         with:
           deployment_id: ${{ steps.deployment-id.outputs.ID }}
           oxygen_deployment_token: ${{ secrets.OXYGEN_DEPLOYMENT_TOKEN }}
+          oxygen_worker_dir: 'dist/worker'
+          oxygen_client_dir: 'dist/client'
 
       # Create GitHub Deployment
       - name: Create GitHub Deployment
