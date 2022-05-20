@@ -8,7 +8,7 @@ node_modules
 /public/build
 /app/styles/tailwind.css
 
-worker/index.js
+worker-dist/
 
 /cypress/screenshots
 /cypress/videos

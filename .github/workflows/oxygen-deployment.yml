@@ -43,7 +43,7 @@ jobs:
         with:
           deployment_id: ${{ steps.deployment-id.outputs.ID }}
           oxygen_deployment_token: ${{ secrets.OXYGEN_DEPLOYMENT_TOKEN }}
-          oxygen_worker_dir: 'worker'
+          oxygen_worker_dir: 'worker-dist'
           oxygen_client_dir: 'public/build'
 
       # Create GitHub Deployment

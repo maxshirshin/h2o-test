@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "remix-worker-template",
-  "main": "./worker/index.js",
+  "main": "./worker-dist/index.js",
   "description": "A demo of Remix running on Cloudflare workers.",
   "license": "MIT",
   "scripts": {
