@@ -4,12 +4,7 @@ import {
 import * as build from "../build/index.js";
 
 const handleRequest = createRequestHandler({ build });
-
-const handleEvent = async (event: FetchEvent) => {
-  const response = await handleRequest(event);
-
-  return response;
-};
+const handleEvent = async (event: FetchEvent) => handleRequest(event);
 
 addEventListener("fetch", async (event) => {
   try {

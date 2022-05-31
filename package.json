@@ -11,18 +11,16 @@
     "build:worker": "NODE_ENV=production ts-node ./build.ts",
     "build:patch": "sed 's/caches.default/caches[\"default\"]/g' ./worker-dist/index-orig.js > ./worker-dist/index.js",
     "build": "npm run build:tailwind && npm run build:remix && npm run build:worker && npm run build:patch",
-    "dev:cypress": "echo 'noop'",
     "dev:tailwind": "tailwindcss -o app/styles/tailwind.css --watch",
-    "dev:miniflare": "miniflare --kv REDIRECTS --kv-persist --build-command \"npx ts-node ./build.ts\" --disable-cache --watch",
+    "dev:miniflare": "miniflare --build-command \"npx ts-node ./build.ts\" --disable-cache --watch",
     "dev:remix": "remix watch",
     "dev": "NODE_ENV=development concurrently \"npm:dev:*\"",
-    "populatekv": "node ./scripts/populate-kv.js",
-    "postinstall": "remix setup cloudflare-workers && npm run populatekv",
+    "postinstall": "remix setup cloudflare-workers",
     "prebuild": "npm run cleanup",
     "test:cypress": "cypress run",
     "test": "start-server-and-test miniflare http-get://localhost:8787 test:cypress",
     "deploy": "wrangler publish",
-    "start": "miniflare --kv REDIRECTS --kv-persist"
+    "start": "miniflare"
   },
   "dependencies": {
     "@cloudflare/kv-asset-handler": "^0.1.3",
