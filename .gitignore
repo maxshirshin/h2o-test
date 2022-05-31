@@ -5,7 +5,7 @@ node_modules
 /.cache
 /.mf
 /build
-/public/build
+/public/client
 /app/styles/tailwind.css
 
 /worker-dist
