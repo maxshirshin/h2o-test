@@ -16,21 +16,7 @@
 To starts your app in development mode, rebuilding assets on file changes, the recommended approach is:
 
 ```sh
-npm run dev
+yarn dev
 ```
 
-This will run your remix app in dev mode using miniflare with the Cypress test runner opened.
-
-## Deployment
-
-First, preview your app with:
-
-```sh
-npx wrangler preview
-```
-
-When confirmed everythings works, deploy the worker with Wrangler using:
-
-```sh
-npm run deploy
-```
+This will run your remix app in dev mode using miniflare.
