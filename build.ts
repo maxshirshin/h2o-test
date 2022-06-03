@@ -12,5 +12,5 @@ esbuild.build({
   define: {
     "process.env.NODE_ENV": `"${mode}"`,
   },
-  outfile: 'worker-dist/index-orig.js',
+  outfile: 'worker-dist/index.js',
 });
