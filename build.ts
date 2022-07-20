@@ -11,6 +11,7 @@ esbuild.build({
   format: 'esm',
   define: {
     "process.env.NODE_ENV": `"${mode}"`,
+    "process.env.REMIX_DEV_SERVER_WS_PORT": `8002`,
   },
   outfile: 'worker-dist/index.js',
 });

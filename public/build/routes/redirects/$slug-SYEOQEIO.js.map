@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["browser-route-module:/Users/maximshirshin/src/github.com/maxshirshin/h2o-test/app/routes/redirects/$slug.ts?browser", "../../../../app/routes/redirects/$slug.ts"],
+  "sourcesContent": ["export { meta } from \"/Users/maximshirshin/src/github.com/maxshirshin/h2o-test/app/routes/redirects/$slug.ts\";", "import type { LoaderFunction, MetaFunction } from \"remix\";\nimport { redirect } from \"remix\";\n\nexport let meta: MetaFunction = ({ params }) => {\n  return {\n    title: `Post ${params.slug} | Remix Cloudflare Demo`,\n    description: \"Demo Cloudflare KV store to do redirects at the edge.\",\n  };\n};\n\nexport let loader: LoaderFunction = async ({ request }) => {\n  let start = Date.now();\n  let redirectPath = `/redirects-stub`;\n\n  return redirect(`${redirectPath}?l=${Date.now() - start}`);\n};\n"],
+  "mappings": ";;;;;AAAA;;;ACAA;AAGO,IAAI,OAAqB,CAAC,EAAE,aAAa;AAC9C,SAAO;AAAA,IACL,OAAO,QAAQ,OAAO;AAAA,IACtB,aAAa;AAAA;AAAA;",
+  "names": []
+}
