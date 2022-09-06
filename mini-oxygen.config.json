@@ -5,6 +5,8 @@
   "publicPath": "/build/",
   "buildCommand": "npx ts-node ./build.ts",
   "watch": false,
-  "modules": false,
-  "env": {}
+  "modules": true,
+  "env": {
+    "PIPA": "42"
+  }
 }

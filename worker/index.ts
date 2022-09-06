@@ -1,15 +1,25 @@
-import {
-  createRequestHandler,
-} from "@remix-run/cloudflare-workers";
+import { createRequestHandler as createRemixRequestHandler } from "@remix-run/server-runtime";
+
 import * as build from "../build/index.js";
 
-const handleRequest = createRequestHandler({ build });
-const handleEvent = async (event: FetchEvent) => handleRequest(event);
+const handleRequest = createRemixRequestHandler(build);
 
-addEventListener("fetch", async (event) => {
-  try {
-    event.respondWith(handleEvent(event));
-  } catch (e: any) {
-    event.respondWith(new Response("Internal Error: " + String(e), { status: 500 }));
-  }
-});
+export default {
+  fetch(request: Request, env, { waitUntil }) {
+    try {
+      return handleRequest(request, {
+        env: Object.assign({}, env),
+        waitUntil,
+        isOxygen: true
+      });
+    } catch (e: unknown) {
+      if (env.NODE_ENV === "development") {
+        return new Response(e instanceof Error ? e.message : String(e), {
+          status: 500,
+        })
+      }
+
+      return new Response("Internal Error", { status: 500 });
+    }
+  },
+}

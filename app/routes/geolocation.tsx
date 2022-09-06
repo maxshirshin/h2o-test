@@ -10,37 +10,22 @@ export let meta: MetaFunction = () => {
   };
 };
 
-export let loader: LoaderFunction = ({ request }) => {
-  let cf = (request as any).cf as IncomingRequestCfProperties;
+export let loader: LoaderFunction = ({ request, context }) => {
+    let country = countries.find((c) => c.cca2 === "DE");
 
-  let country = countries.find((c) => c.cca2 === cf.country);
-
-  let formattedLocation = "";
-  if (cf.city) formattedLocation += cf.city + ", ";
-  if (cf.region) formattedLocation += cf.region + ", ";
-  formattedLocation += cf.country;
-
-  return json({
-    formattedLocation,
-    country,
-  });
+    return json({
+      country,
+      pipa: context?.env?.PIPA,
+      isOxygen: context?.isOxygen
+    });
 };
 
 export default function Geolocation() {
-  let { formattedLocation, country } = useLoaderData();
+  let { country,pipa, isOxygen } = useLoaderData();
 
   return (
     <main className="container mx-auto prose px-4 py-8">
-      <h1>Geolocation</h1>
-
-      <p>
-        Show localized content based on information avaliable in the{" "}
-        <code>Request.cf</code> object.
-      </p>
-
-      <p>
-        Location: {formattedLocation} {country.flag}
-      </p>
+      <h1>Environment var PIPA: {pipa}, we run in {isOxygen ? "Oxygen" : "no idea"}</h1>
 
       <p>Currencies</p>
       <ul>
